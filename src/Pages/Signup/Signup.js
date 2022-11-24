@@ -6,7 +6,7 @@ import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../../Contexts/AuthProvider";
 
 const Signup = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, updateuser } = useContext(AuthContext);
   const [firebaseerror, setfirebaseerror] = useState("");
   const {
     register,
@@ -20,6 +20,12 @@ const Signup = () => {
     createUser(data.email, data.password)
       .then((result) => {
         console.log(result);
+        const userInfo = {
+          displayName: data.name,
+        };
+        updateuser(userInfo)
+          .then(() => {})
+          .catch((err) => console.error(err));
       })
       .catch((err) => {
         console.error(err);
@@ -67,6 +73,20 @@ const Signup = () => {
             <label className="label">
               <span className="label-text text-xs link">Forget Password?</span>
             </label>
+          </div>
+          <div className="m-5 border-2 p-2 rounded-lg">
+            <div className="form-control">
+              <label className="label cursor-pointer">
+                <span className="label-text">Seller</span>
+                <input type="radio" name="radio-10" className="radio checked:bg-red-500" checked />
+              </label>
+            </div>
+            <div className="form-control">
+              <label className="label cursor-pointer">
+                <span className="label-text">Buyer</span>
+                <input type="radio" name="radio-10" className="radio checked:bg-blue-500" checked />
+              </label>
+            </div>
           </div>
           <input className="btn btn-primary w-full text-white" value="submit" type="submit" />
         </form>

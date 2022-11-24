@@ -48,7 +48,9 @@ const Navbar = () => {
         <div className="navbar-end">
           {user?.uid ? (
             <>
-              <Link className="btn mx-2 btn-outline btn-accent btn-sm">DashBoard</Link>
+              <Link to="/dashboard" className="btn mx-2 btn-outline btn-accent btn-sm">
+                DashBoard
+              </Link>
               <button onClick={logOut} className="btn btn-outline btn-accent btn-sm mr-5">
                 Log Out
               </button>

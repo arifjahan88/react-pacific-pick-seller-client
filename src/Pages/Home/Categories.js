@@ -10,9 +10,9 @@ const Categories = () => {
   });
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 m-5">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:m-5 mt-4">
       {categories.map((category) => (
-        <div>
+        <div key={category._id}>
           <div className="card w-96 bg-base-100 shadow-xl">
             <figure>
               <img className="w-52" src={category.img} alt="Shoes" />
