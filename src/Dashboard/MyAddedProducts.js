@@ -2,19 +2,19 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
 import { AuthContext } from "../Contexts/AuthProvider";
 
-const Myproducts = () => {
+const MyAddedProducts = () => {
   const { user } = useContext(AuthContext);
-  const { data: bookings = [] } = useQuery({
-    queryKey: ["bookings", user?.email],
+  const { data: addedproducts = [] } = useQuery({
+    queryKey: ["addedproducts"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/bookings?email=${user?.email}`);
+      const res = await fetch("http://localhost:5000/addedproducts");
       const data = await res.json();
       return data;
     },
   });
   return (
     <div>
-      <h1 className="text-3xl text-semibold mb-5">My Products</h1>
+      <h2 className="text-3xl font-semibold">Added Products {addedproducts.length}</h2>
       <div className="overflow-x-auto">
         <table className="table w-full">
           {/* <!-- head --> */}
@@ -33,7 +33,7 @@ const Myproducts = () => {
           </thead>
           <tbody>
             {/* <!-- row 1 --> */}
-            {bookings.map((booking, index) => (
+            {addedproducts.map((booking, index) => (
               <tr key={booking._id} className="hover cursor-default">
                 <th>{index + 1}</th>
                 <td>{booking.name}</td>
@@ -44,7 +44,8 @@ const Myproducts = () => {
                 <td>{booking.location}</td>
                 <td>{booking.purchase}</td>
                 <td>
-                  <button className="btn btn-outline btn-error btn-xs">Delete</button>
+                  <button className="btn btn-outline btn-success btn-xs mr-2">Advertise</button>
+                  <button className="btn btn-outline btn-error btn-xs">Sold</button>
                 </td>
               </tr>
             ))}
@@ -55,4 +56,4 @@ const Myproducts = () => {
   );
 };
 
-export default Myproducts;
+export default MyAddedProducts;
