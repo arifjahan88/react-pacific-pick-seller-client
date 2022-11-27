@@ -12,7 +12,9 @@ const Navbar = () => {
         </Link>
         <Link className="rounded-lg m-1">Catagories</Link>
         <Link className="rounded-lg m-1">Products</Link>
-        <Link className="rounded-lg m-1">Blog</Link>
+        <Link className="rounded-lg m-1" to="/blogs">
+          Blog
+        </Link>
         <Link className="rounded-lg m-1">FAQ</Link>
       </li>
     </>

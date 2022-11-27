@@ -6,6 +6,7 @@ import Myproducts from "../Dashboard/Myproducts";
 import DashBoardLayout from "../Layout/DashBoardLayout";
 import Main from "../Layout/Main";
 import Route404 from "../Pages/404Route/Route404";
+import Blog from "../Pages/Blog/Blog";
 import Category from "../Pages/Category/Category";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/LogIn/Login";
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
       {
         path: "category/:id",
         element: <Category></Category>,
+      },
+      {
+        path: "blogs",
+        element: <Blog></Blog>,
       },
     ],
   },
