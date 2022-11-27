@@ -15,7 +15,7 @@ const Signup = () => {
   } = useForm();
 
   const HandleSignUp = (data) => {
-    console.log(data);
+    console.log(data.category);
     setfirebaseerror("");
     createUser(data.email, data.password)
       .then((result) => {
@@ -24,13 +24,30 @@ const Signup = () => {
           displayName: data.name,
         };
         updateuser(userInfo)
-          .then(() => {})
+          .then(() => {
+            saveUser(data.name, data.email, data.category);
+          })
           .catch((err) => console.error(err));
       })
       .catch((err) => {
         console.error(err);
         setfirebaseerror(err.message);
       });
+
+    const saveUser = (name, email, category) => {
+      const user = { name, email, category };
+      fetch("http://localhost:5000/users", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(user),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        });
+    };
   };
   return (
     <div className="h-[700px] flex justify-center items-center">
@@ -74,19 +91,12 @@ const Signup = () => {
               <span className="label-text text-xs link">Forget Password?</span>
             </label>
           </div>
-          <div className="m-5 border-2 p-2 rounded-lg">
-            <div className="form-control">
-              <label className="label cursor-pointer">
-                <span className="label-text">Seller</span>
-                <input type="radio" name="radio-10" className="radio checked:bg-red-500" checked />
-              </label>
-            </div>
-            <div className="form-control">
-              <label className="label cursor-pointer">
-                <span className="label-text">Buyer</span>
-                <input type="radio" name="radio-10" className="radio checked:bg-blue-500" checked />
-              </label>
-            </div>
+          <div className="my-3 border-2 w-1/2 mx-auto flex justify-center rounded-lg bg-slate-300 py-2">
+            <select {...register("category")} className="bg-slate-300">
+              <option value="">Select Your Role</option>
+              <option value="Seller">Seller</option>
+              <option value="Buyer">Buyer</option>
+            </select>
           </div>
           <input className="btn btn-primary w-full text-white" value="submit" type="submit" />
         </form>

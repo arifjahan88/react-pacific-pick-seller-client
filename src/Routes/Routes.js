@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Addproducts from "../Dashboard/Addproducts";
+import AdvertiseProduct from "../Dashboard/AdvertiseProduct";
 import Dashboard from "../Dashboard/Dashboard";
 import MyAddedProducts from "../Dashboard/MyAddedProducts";
 import Myproducts from "../Dashboard/Myproducts";
@@ -39,10 +40,6 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/dashboard",
-        element: <Dashboard></Dashboard>,
-      },
-      {
-        path: "/dashboard/myproducts",
         element: <Myproducts></Myproducts>,
       },
       {
@@ -52,6 +49,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/addedproducts",
         element: <MyAddedProducts></MyAddedProducts>,
+      },
+      {
+        path: "/dashboard/advertiseproducts",
+        element: <AdvertiseProduct></AdvertiseProduct>,
       },
     ],
   },

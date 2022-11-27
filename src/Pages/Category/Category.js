@@ -26,7 +26,7 @@ const Category = () => {
                 Original Price : <span className="font-bold">${c.originalprice}</span>
               </p>
               <p>
-                Resail Price : <span className="font-bold">${c.resalprice}</span>
+                Resail Price : <span className="font-bold">${c.resaleprice}</span>
               </p>
             </div>
             <div>

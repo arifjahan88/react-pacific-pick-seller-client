@@ -13,7 +13,7 @@ const Categories = () => {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:m-5 mt-4">
       {categories.map((category) => (
         <div key={category._id}>
-          <div className="card w-96 bg-base-100 shadow-xl">
+          <div className="card w-96 bg-base-100 shadow-xl p-4">
             <figure>
               <img className="w-52" src={category.img} alt="Shoes" />
             </figure>

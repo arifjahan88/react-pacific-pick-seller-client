@@ -1,10 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
+import toast from "react-hot-toast";
 import { AuthContext } from "../Contexts/AuthProvider";
 
 const Myproducts = () => {
+  const [advertisedata, setadvertsedata] = useState("");
   const { user } = useContext(AuthContext);
-  const { data: bookings = [] } = useQuery({
+  const { data: bookings = [], refetch } = useQuery({
     queryKey: ["bookings", user?.email],
     queryFn: async () => {
       const res = await fetch(`http://localhost:5000/bookings?email=${user?.email}`);
@@ -12,6 +14,43 @@ const Myproducts = () => {
       return data;
     },
   });
+
+  const handlAdvertise = (id) => {
+    console.log(id);
+    fetch(`http://localhost:5000/bookings/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setadvertsedata(data);
+        refetch();
+      });
+    const productsdata = {
+      itemname: advertisedata.itemname,
+      Image: advertisedata.image,
+      price: advertisedata.price,
+      email: advertisedata.email,
+    };
+
+    fetch("http://localhost:5000/advertiseproduct", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(productsdata),
+    })
+      .then((res) => res.json())
+      .then((advertisement) => {
+        if (advertisement.acknowledged) {
+          refetch();
+          toast.success("Advertise Added");
+        } else {
+          toast.error(advertisement.message);
+        }
+      });
+  };
+
+  const handledeleteclick = (id) => {
+    console.log(id);
+  };
   return (
     <div>
       <h1 className="text-3xl text-semibold mb-5">My Products</h1>
@@ -44,7 +83,16 @@ const Myproducts = () => {
                 <td>{booking.location}</td>
                 <td>{booking.purchase}</td>
                 <td>
-                  <button className="btn btn-outline btn-error btn-xs">Delete</button>
+                  <button
+                    onClick={() => handlAdvertise(booking._id)}
+                    className="btn btn-outline btn-success btn-xs mr-2"
+                  >
+                    Advertise
+                  </button>
+                  <button className="btn btn-outline btn-error btn-xs mr-2">Sell</button>
+                  <button onClick={() => handledeleteclick(booking._id)} className="btn btn-outline btn-error btn-xs">
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}

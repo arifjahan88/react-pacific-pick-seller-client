@@ -1,9 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext } from "react";
-import { AuthContext } from "../Contexts/AuthProvider";
 
 const MyAddedProducts = () => {
-  const { user } = useContext(AuthContext);
   const { data: addedproducts = [] } = useQuery({
     queryKey: ["addedproducts"],
     queryFn: async () => {
@@ -12,6 +9,7 @@ const MyAddedProducts = () => {
       return data;
     },
   });
+
   return (
     <div>
       <h2 className="text-3xl font-semibold">Added Products {addedproducts.length}</h2>
@@ -44,8 +42,7 @@ const MyAddedProducts = () => {
                 <td>{booking.location}</td>
                 <td>{booking.purchase}</td>
                 <td>
-                  <button className="btn btn-outline btn-success btn-xs mr-2">Advertise</button>
-                  <button className="btn btn-outline btn-error btn-xs">Sold</button>
+                  <button className="btn btn-outline btn-error btn-xs">Delete</button>
                 </td>
               </tr>
             ))}

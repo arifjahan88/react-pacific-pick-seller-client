@@ -26,6 +26,7 @@ const CategoryModal = ({ category, setcategory }) => {
       condition: category.rating.badge,
       purchase: category.use,
       puchaseDate: category.published_date,
+      image: category.img,
     };
     fetch("http://localhost:5000/bookings", {
       method: "POST",
