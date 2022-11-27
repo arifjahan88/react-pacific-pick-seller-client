@@ -29,7 +29,7 @@ const Addproducts = () => {
       phone: data.phone,
     };
 
-    fetch("http://localhost:5000/addedproducts", {
+    fetch("https://react-pacific-pick-seller-server.vercel.app/addedproducts", {
       method: "POST",
       headers: {
         "content-type": "application/json",

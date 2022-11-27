@@ -9,15 +9,14 @@ const Myproducts = () => {
   const { data: bookings = [], refetch } = useQuery({
     queryKey: ["bookings", user?.email],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/bookings?email=${user?.email}`);
+      const res = await fetch(`https://react-pacific-pick-seller-server.vercel.app/bookings?email=${user?.email}`);
       const data = await res.json();
       return data;
     },
   });
 
   const handlAdvertise = (id) => {
-    console.log(id);
-    fetch(`http://localhost:5000/bookings/${id}`)
+    fetch(`https://react-pacific-pick-seller-server.vercel.app/bookings/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setadvertsedata(data);
@@ -30,7 +29,7 @@ const Myproducts = () => {
       email: advertisedata.email,
     };
 
-    fetch("http://localhost:5000/advertiseproduct", {
+    fetch("https://react-pacific-pick-seller-server.vercel.app/advertiseproduct", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -48,8 +47,15 @@ const Myproducts = () => {
       });
   };
 
-  const handledeleteclick = (id) => {
-    console.log(id);
+  const handledeleteclick = (booking) => {
+    fetch(`http://localhost:5000/bookings/${booking._id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        refetch();
+        toast.success(`${booking.itemname} is deleted Successfully`);
+      });
   };
   return (
     <div>
@@ -89,8 +95,7 @@ const Myproducts = () => {
                   >
                     Advertise
                   </button>
-                  <button className="btn btn-outline btn-error btn-xs mr-2">Sell</button>
-                  <button onClick={() => handledeleteclick(booking._id)} className="btn btn-outline btn-error btn-xs">
+                  <button onClick={() => handledeleteclick(booking)} className="btn btn-outline btn-error btn-xs">
                     Delete
                   </button>
                 </td>

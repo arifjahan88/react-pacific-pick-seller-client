@@ -9,7 +9,9 @@ const AdvertiseSection = () => {
   const { data: advertisedata = [] } = useQuery({
     queryKey: ["advertisedata", user?.email],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/advertiseproduct?email=${user?.email}`);
+      const res = await fetch(
+        `https://react-pacific-pick-seller-server.vercel.app/advertiseproduct?email=${user?.email}`
+      );
       const data = await res.json();
       return data;
     },

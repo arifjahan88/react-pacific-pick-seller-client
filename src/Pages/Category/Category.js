@@ -8,7 +8,7 @@ const Category = () => {
   const [usecategory, setcategory] = useState(null);
   const { data: category = [] } = useQuery({
     queryKey: ["category"],
-    queryFn: () => fetch("http://localhost:5000/bikeslist").then((res) => res.json()),
+    queryFn: () => fetch("https://react-pacific-pick-seller-server.vercel.app/bikeslist").then((res) => res.json()),
   });
   return (
     <div className="lg:mx-32 mt-10">

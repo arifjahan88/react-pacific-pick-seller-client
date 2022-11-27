@@ -6,7 +6,8 @@ import { Link } from "react-router-dom";
 const Categories = () => {
   const { data: categories = [] } = useQuery({
     queryKey: ["categories"],
-    queryFn: () => fetch("http://localhost:5000/bikescategoris").then((res) => res.json()),
+    queryFn: () =>
+      fetch("https://react-pacific-pick-seller-server.vercel.app/bikescategoris").then((res) => res.json()),
   });
 
   return (
