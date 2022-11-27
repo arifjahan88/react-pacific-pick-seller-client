@@ -1,11 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import Addproducts from "../Dashboard/Addproducts";
 import AdvertiseProduct from "../Dashboard/AdvertiseProduct";
-import Dashboard from "../Dashboard/Dashboard";
 import MyAddedProducts from "../Dashboard/MyAddedProducts";
 import Myproducts from "../Dashboard/Myproducts";
 import DashBoardLayout from "../Layout/DashBoardLayout";
 import Main from "../Layout/Main";
+import Route404 from "../Pages/404Route/Route404";
 import Category from "../Pages/Category/Category";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/LogIn/Login";
@@ -55,5 +55,9 @@ export const router = createBrowserRouter([
         element: <AdvertiseProduct></AdvertiseProduct>,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <Route404></Route404>,
   },
 ]);
