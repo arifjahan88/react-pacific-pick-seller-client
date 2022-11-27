@@ -48,7 +48,7 @@ const Myproducts = () => {
   };
 
   const handledeleteclick = (booking) => {
-    fetch(`http://localhost:5000/bookings/${booking._id}`, {
+    fetch(`https://react-pacific-pick-seller-server.vercel.app/${booking._id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
